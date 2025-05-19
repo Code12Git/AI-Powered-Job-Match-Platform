@@ -1,6 +1,6 @@
-const {z} = require('zod')
+ import z from 'zod';
 
-export const userSchema = z.object({
+export const registerSchema = z.object({
   first_name: z
     .string()
     .trim()
@@ -23,3 +23,4 @@ export const userSchema = z.object({
     .regex(/[!@#$%^&*(),.?":{}|<>]/, "Password must contain at least 1 special character"),
 });
 
+export type RegisterForm = z.infer<typeof registerSchema>;
