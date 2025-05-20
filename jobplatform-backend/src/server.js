@@ -17,7 +17,7 @@ connectDB().catch(err => {
 
 app.use(express.json());
 app.use(cors());
-app.use('/api', routes); 
+app.use('/api/v1', routes); 
 
 
  app.get('/', (req, res) => {

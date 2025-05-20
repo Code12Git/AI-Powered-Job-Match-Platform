@@ -1,2 +1,3 @@
 const user = require('./user')
-module.exports = {userModel:user}
+const profile = require('./profile')
+module.exports = {userModel:user,profileModel:profile}
