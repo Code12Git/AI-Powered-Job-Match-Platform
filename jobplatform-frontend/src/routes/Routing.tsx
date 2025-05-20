@@ -3,6 +3,7 @@ import Login from "../pages/Login";
 
 import { useEffect, useState } from "react";
 import Register from "../pages/Register";
+import Profile from "../pages/Profile";
 
 const Routing = () => {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ const Routing = () => {
 
   return (
     <Routes>
-      
+      <Route path="/profile" element={<Profile />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
     </Routes>

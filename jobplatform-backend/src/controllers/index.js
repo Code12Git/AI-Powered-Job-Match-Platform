@@ -1,3 +1,5 @@
 const authController = require('./authController')
 const profileController = require('./profileController')
-module.exports = {authController,profileController}
+const jobController = require('./jobController')
+
+module.exports = {authController,profileController,jobController}

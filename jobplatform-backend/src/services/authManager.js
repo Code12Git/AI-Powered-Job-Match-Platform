@@ -57,6 +57,7 @@ const adminLogin = async() => {
       password: fromEnv('ADMIN_PASSWORD')
     }
     const admin = await userModel.findOne({ email: adminCreds.email });
+    console.log(admin)
     if (!admin) throw new AppError({ ...NOT_FOUND, message: "Admin not found" });
     const isMatch = await bcrypt.compare(adminCreds.password, admin.password);
     if (!isMatch) throw new AppError({ ...UNAUTHORIZED, message: "Invalid email or password" });
