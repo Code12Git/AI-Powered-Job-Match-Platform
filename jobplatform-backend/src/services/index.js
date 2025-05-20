@@ -1,4 +1,4 @@
 const authManager = require('./authManager')
 const responseManager = require('./responseManager')
-
-module.exports = {authManager,responseManager}
+const profileManager = require('./profileManager')
+module.exports = { authManager,responseManager,profileManager }

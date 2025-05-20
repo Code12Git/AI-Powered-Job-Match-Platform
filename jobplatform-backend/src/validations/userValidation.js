@@ -1,6 +1,6 @@
-const {z} = require('zod')
+const z = require('zod')
 
-export const userSchema = z.object({
+const userSchema = z.object({
   first_name: z
     .string()
     .trim()
@@ -23,3 +23,5 @@ export const userSchema = z.object({
     .regex(/[!@#$%^&*(),.?":{}|<>]/, "Password must contain at least 1 special character"),
 });
 
+
+module.exports = {userSchema}
