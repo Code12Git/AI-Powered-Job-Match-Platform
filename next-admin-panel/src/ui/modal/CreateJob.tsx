@@ -67,8 +67,7 @@ export function CreateJob({fetchJobs}:CreateProps) {
   useEffect(()=>{
     setValue('skills',selectedSkills)
   },[selectedSkills,setValue])
-  console.log(selectedSkills)
-
+ 
   const onSubmit = async(data: JobForm) => {
     data.skills = selectedSkills;
     try{
@@ -211,6 +210,8 @@ export function CreateJob({fetchJobs}:CreateProps) {
                       <SelectItem value="part-time">Part-time</SelectItem>
                       <SelectItem value="contract">Contract</SelectItem>
                       <SelectItem value="remote">Remote</SelectItem>
+                      <SelectItem value="onsite">Onsite</SelectItem>
+                      <SelectItem value="any">Any</SelectItem>
                     </SelectContent>
                   </Select>
                 )}

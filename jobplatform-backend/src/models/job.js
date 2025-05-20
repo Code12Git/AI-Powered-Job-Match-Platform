@@ -23,7 +23,7 @@ const jobSchema = new Schema({
   },
   jobType:{
     type:String,
-    enum:["full-time","part-time","contract","remote"]
+    enum:["full-time","part-time","contract","remote","onsite","any"]
   },
   location: {
     city: String,
