@@ -217,6 +217,8 @@ function EditJob({ job,fetchJobs }: EditProps) {
                     <SelectItem value="part-time">Part-time</SelectItem>
                     <SelectItem value="contract">Contract</SelectItem>
                     <SelectItem value="remote">Remote</SelectItem>
+                    <SelectItem value="onsite">Onsite</SelectItem>
+                    <SelectItem value="any">Any</SelectItem>
                   </SelectContent>
                 </Select>
               )}
