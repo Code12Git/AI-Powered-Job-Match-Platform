@@ -1,10 +1,11 @@
 const express = require('express');
-const { userSchema } = require('../validations');
 const { authController } = require('../controllers');
 const {verifyData} = require('../middleware');
+const {registerSchema} = require('../validations');
+const {loginSchema} = require('../validations');
 const router = express.Router();
 
-router.post('/register',verifyData(userSchema),authController.register)
-router.post('/login',verifyData(userSchema),authController.login)
-router.post('/admin',verifyData(userSchema),authController.adminLogin)
+router.post('/register',verifyData(registerSchema),authController.register)
+router.post('/login',verifyData(loginSchema),authController.login)
+router.post('/admin',verifyData(loginSchema),authController.adminLogin)
 module.exports = router

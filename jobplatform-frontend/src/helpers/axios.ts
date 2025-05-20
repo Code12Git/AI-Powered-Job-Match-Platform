@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const BASE_URL = 'http://localhost:3001/api'
+const BASE_URL = 'http://localhost:3001/api/v1'
 const token = localStorage.getItem('token')?.replace(/"/g, '');
 
 export const publicRequest = axios.create({

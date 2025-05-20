@@ -1,6 +1,6 @@
 const z = require('zod')
 
-const userSchema = z.object({
+const registerSchema = z.object({
   first_name: z
     .string()
     .trim()
@@ -24,4 +24,4 @@ const userSchema = z.object({
 });
 
 
-module.exports = {userSchema}
+module.exports = registerSchema
