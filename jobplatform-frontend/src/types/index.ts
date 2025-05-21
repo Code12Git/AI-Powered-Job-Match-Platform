@@ -4,7 +4,8 @@
 
 export interface User {
     _id?: string;
-    name: string;
+    first_name: string;
+    last_name:string
     username: string;
     email: string;
     password: string; 
@@ -45,9 +46,17 @@ export interface User {
     error:null
   }
   export interface  jobState{
-    jobData:Job | [],
+    jobData: Job[]; 
+    filteredData:Job | [],
+    suggestedData:[],
     isLoading:boolean,
     error:null
+  }
+
+  export interface jobPayload{
+    title:string;
+    jobType:string;
+    experience:string;
   }
   export interface Job {
     _id: string;
@@ -61,9 +70,13 @@ export interface User {
       country: string;
       postal_code: string;
     };
+    experience:string,
     skills: string[];
+    createdAt:Date;
     __v: number;
   }
+
+  export type jobData = Job[]
   
   export interface modalState{
     modalType:string;
@@ -109,7 +122,7 @@ export interface UserProfile {
     city?: string;
     state?: string;
     country?: string;
-    postalCode?:string
+    postal_code?:string
   };
   experience: "0-1" | "1-3" | "3-5" | "5+";  
 }
@@ -122,9 +135,7 @@ export interface UserProfile {
     id?: string;
   }
 
-  export interface profilePayload{
-    
-  }
+  export type profilePayload = object
   
   export interface userDataPayload{
     user?:User

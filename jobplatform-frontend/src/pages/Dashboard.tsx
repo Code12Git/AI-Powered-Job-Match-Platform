@@ -1,10 +1,9 @@
 import { motion } from 'framer-motion';
 import { useAnimation } from 'framer-motion';
 import { useEffect } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink} from 'react-router-dom';
 const Dashboard = () => {
   const controls = useAnimation();
-  const navigate = useNavigate()
   useEffect(() => {
     controls.start({
       backgroundPosition: ['0% 50%', '100% 50%'],

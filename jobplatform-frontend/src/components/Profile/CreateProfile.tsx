@@ -5,11 +5,12 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { type ProfileFormData, profileSchema } from '../../validation/profileValidation';
 import { useEffect, useState } from 'react';
 import { privateRequest } from '../../helpers/axios';
+import { useAppSelector } from '../../hooks/hooks';
 
 const CreateProfile = () => {
-  const user = JSON.parse(localStorage.getItem('user'))
+  const {userData} = useAppSelector(state=>state.auth)
   const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
-
+  const {profileData} = useAppSelector(state=>state.profile)
   const {
     register,
     handleSubmit,
@@ -19,15 +20,15 @@ const CreateProfile = () => {
   } = useForm<ProfileFormData>({
     resolver: zodResolver(profileSchema),
     defaultValues: {
-      name: `${user.first_name} ${user.last_name}`,
+      name: `${userData?.first_name ?? ''} ${userData?.last_name ?? ''}`.trim(),
       location: {
-        city: '',
-        state: '',
-        country: '',
-        postal_code: ''
+        city: profileData?.location.city,
+        state: profileData?.location.state,
+        country: profileData?.location.country,
+        postal_code: profileData?.location.postal_code
       },
       experience: "0-1",
-      skills: [],
+      skills: profileData?.skills,
       jobType: 'remote'
     },
   });
