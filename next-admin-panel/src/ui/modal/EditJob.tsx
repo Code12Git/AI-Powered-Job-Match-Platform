@@ -77,6 +77,8 @@ function EditJob({ job,fetchJobs }: EditProps) {
         country: job.location?.country || "",
         postal_code: job.location?.postal_code || "",
       },
+      salary:job.salary,
+      experience:job.experience
     });
     setSelectedSkills(job.skills);
   }, [job, reset]);
@@ -139,6 +141,47 @@ function EditJob({ job,fetchJobs }: EditProps) {
               <p className="text-sm text-red-500">{errors.company.message}</p>
             )}
           </div>
+
+          <div className="space-y-2">
+              <Label htmlFor="salary">Salary</Label>
+              <Input
+                id="salary"
+                type='number'
+                {...register("salary", { valueAsNumber: true })}
+                placeholder="$20,00.."
+                className={errors.salary ? "border-red-500" : ""}
+              />
+              {errors.salary && (
+                <p className="text-sm text-red-500">{errors.salary.message}</p>
+              )}
+            </div>
+
+            {/* Experience */}
+            <div className="space-y-2">
+              <Label>Experience*</Label>
+              <Controller
+                name="experience"
+                control={control}
+                render={({ field }) => (
+                  <Select onValueChange={field.onChange} value={field.value}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select Experience " />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="0-1">0-1</SelectItem>
+                      <SelectItem value="1-3">1-3</SelectItem>
+                      <SelectItem value="3-5">3-5</SelectItem>
+                      <SelectItem value="5+">5+</SelectItem>
+                    </SelectContent>
+                  </Select>
+                )}
+              />
+               {errors.experience && (
+                    <p className="text-sm text-red-500">
+                      {errors.experience.message}
+                    </p>
+                  )}
+            </div>
 
           {/* Location */}
           <div className="space-y-2">
