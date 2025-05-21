@@ -1,7 +1,9 @@
 const { AppError } = require("../utils");
 
 const verifyData = (schema) => async (req, res, next) => {
+  
   try {
+    console.log(req.body)
     if (!schema || typeof schema.parse !== "function") {
       throw new Error("Invalid schema: Missing parse method");
     }

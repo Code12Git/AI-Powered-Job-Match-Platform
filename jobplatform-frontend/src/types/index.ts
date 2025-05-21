@@ -110,17 +110,7 @@ export interface User {
     error: string | null;  // Changed to string for consistency
   }
   
-  export interface taskPayload {
-    id?: string;
-    _id?:string;
-    taskData?: Task;
-    searchType?:string;
-    status?:string;
-    priority?:string;
-    dueDate?:string;
-    task?:string;
-  }
-  
+
   export type ErrorType = 
     | {
         err: {

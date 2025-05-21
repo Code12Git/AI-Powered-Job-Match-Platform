@@ -3,20 +3,34 @@ const { AppError } = require("../utils");
 const { NOT_FOUND } = require("../utils/errors");
 
 const create = async (body, user) => {
-  const { job_title, company, start_date, end_date, description } = body;
-  const { userId } = user;
+  const { skills, jobType, location, experience } = body;
+  const { _id } = user;
+
   try {
-    const user = await userModel.findById(userId);
-    if (!user) throw new AppError({ ...NOT_FOUND, message: "User not found!" });
-    const profile = await profileModel.create({
-      job_title,
-      company,
-      start_date,
-      end_date,
-      description,
-      user: userId,
-    });
-    return profile;
+    const foundUser = await userModel.findById(_id);
+    if (!foundUser) {
+      throw new AppError({ ...NOT_FOUND, message: "User not found!" });
+    }
+
+     const existingProfile = await profileModel.findOne({ user: _id });
+
+    if (existingProfile) {
+       const updatedProfile = await profileModel.findOneAndUpdate(
+        { user: _id },
+        { skills, jobType, location, experience },
+        { new: true }  
+      );
+      return updatedProfile;
+    } else {
+       const newProfile = await profileModel.create({
+        skills,
+        jobType,
+        location,
+        experience,
+        user: _id,
+      });
+      return newProfile;
+    }
   } catch (err) {
     throw err;
   }
