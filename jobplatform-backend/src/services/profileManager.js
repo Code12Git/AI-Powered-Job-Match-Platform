@@ -36,16 +36,16 @@ const create = async (body, user) => {
   }
 };
 
-const get = async (params) => {
-  const { id } = params;
+const get = async (user) => {
+  const { id } = user;
 
   if (!id) {
-    throw new AppError({ ...BAD_REQUEST, message: "Profile ID is required" });
+    throw new AppError({ ...BAD_REQUEST, message: "User ID is required" });
   }
 
   try {
-    const profile = await profileModel.findById(id);
-
+    const profile = await profileModel.findOne({ user: id });
+    console.log("Profile:",profile)
     if (!profile) {
       throw new AppError({ ...NOT_FOUND, message: "Profile not found" });
     }

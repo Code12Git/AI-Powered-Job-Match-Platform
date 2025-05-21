@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
     "@hookform/resolvers": "^5.0.1",
     "@tailwindcss/vite": "^4.1.7",
     "axios": "^1.9.0",
@@ -17,6 +18,7 @@
     "framer-motion": "^12.9.7",
     "lucide-react": "^0.507.0",
     "motion": "^12.9.4",
+    "p-limit": "^6.2.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-hook-form": "^7.56.1",

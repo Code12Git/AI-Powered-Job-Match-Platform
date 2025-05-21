@@ -8,13 +8,13 @@ const _ = require("lodash");
 const verifyToken = async (req, res, next) => {
   try {
       const { authorization } = req.headers;
-      if (_.isEmpty(authorization)) {
+       if (_.isEmpty(authorization)) {
           const error = NO_AUTH_HEADER;
           throw new AppError(error.code, error.message, error.statusCode);
       }
 
-      const accessToken = authorization.split(" ")[1];
-      if (!accessToken) {
+       const accessToken = authorization.split(" ")[1];
+       if (!accessToken) {
           const error = INVALID_ACCESS_TOKEN;
           throw new AppError(error.code, error.message, error.statusCode);
       }
@@ -24,7 +24,7 @@ const verifyToken = async (req, res, next) => {
           const error = NOT_FOUND;
           throw new AppError(error.code, error.message, error.statusCode);
       }
-      req.user = user;
+       req.user = user;
       next();
   } catch (err) {
       next(err);

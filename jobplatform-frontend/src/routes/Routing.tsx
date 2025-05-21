@@ -6,6 +6,7 @@ import Profile from "../pages/Profile";
 import Dashboard from "../pages/Dashboard";
 import Jobs from "../pages/Jobs";
 import RequireAuth from "../hooks/RequireAuth";
+import Match from "../pages/Match";
  
 const Routing = () => {
 
@@ -16,7 +17,8 @@ const Routing = () => {
       <Route path='/' element={<Dashboard />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/jobs" element={<Jobs />} />
-      </Route>
+      <Route path='/recommendations' element={<Match />} />
+             </Route>
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
     </Routes>

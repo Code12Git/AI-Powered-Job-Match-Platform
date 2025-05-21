@@ -1,6 +1,5 @@
 const {responseManager, jobManager} = require('../services')
 
-
 const create = async(request,response) => {
     try{
         const result = await jobManager.create(request.body)
@@ -46,4 +45,13 @@ const getAll = async(request,response) => {
     }
 }
 
-module.exports = { create, get, getAll, update,deleteOne };
+const getRecommendation = async(request,response) => {
+    try{
+        const result = await jobManager.getRecommendation(request.body)
+        return responseManager.sendSuccessResponse(response,result,'Job Recommendation found Successfully!')
+    }catch(err){
+        return responseManager.sendErrorResponse(response,err,'Error Fetching Job Recommendation')
+    }
+}
+
+module.exports = { create, get, getAll, update,deleteOne,getRecommendation };
