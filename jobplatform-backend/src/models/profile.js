@@ -2,40 +2,6 @@ const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
 
-const workSchema = new Schema({
-  job_title: {
-    type: String,
-    required: true,
-  },
-  company: {
-    type: String,
-    required: true,
-  },
-  start_date: {
-    type: Date,
-    required: true,
-  },
-  end_date: Date,
-  current: {
-    type: Boolean,
-    default: false,
-  },
-  description: String,
-});
-
-const skillSchema = new Schema({
-  name: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  proficiency: {
-    type: String,
-    enum: ["beginner", "intermediate", "advanced"],
-    default: "intermediate",
-  },
-});
-
 const profileSchema = new Schema(
   {
     user: {
@@ -44,9 +10,13 @@ const profileSchema = new Schema(
       required: true,
       unique: true,
     },
-    skill: {
-      type: [skillSchema],
-      default: [],
+    skills: {
+      type: [String],
+      required: true
+    },
+    jobType:{
+      type:String,
+      enum:["full-time","part-time","contract","remote","onsite","any"]
     },
     location: {
       city: String,
@@ -55,8 +25,8 @@ const profileSchema = new Schema(
       postal_code: String,
     },
     experience: {
-      type: [workSchema],
-      default: [],
+      type: String,
+      enum:["0-1","1-3","3-5","5+"]
     },
   },
   { timestamps: true }

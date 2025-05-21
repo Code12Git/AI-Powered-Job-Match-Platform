@@ -3,9 +3,9 @@ const { AppError } = require("../utils");
 const { NOT_FOUND } = require("../utils/errors");
 
 const create = async (body) => {
-    const { title, description, company, skills,jobType, location } = body;
+    const { title, description, company, skills,jobType, location, experience,salary } = body;
     try {
-        const job = await jobModel.create({title,description,company,skills,location,jobType});
+        const job = await jobModel.create({title,description,company,skills,location,jobType,experience,salary});
         return job;
     } catch (err) {
         throw err;

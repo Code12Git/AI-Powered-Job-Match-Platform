@@ -6,6 +6,8 @@ const jobSchema = z.object({
   description: z.string().min(20, "Description must be at least 20 characters"),
   jobType: z.enum(["full-time","part-time","contract","remote","onsite","any"]),
   skills: z.array(z.string()).min(1, "At least one skill is required"),
+  experience: z.enum(["0-1", "1-3", "3-5", "5+"]),
+  salary:z.number().optional(),
   location: z.object({
     city: z.string().min(2, "City must be at least 2 characters"),
     state: z.string().min(2, "State must be at least 2 characters"),

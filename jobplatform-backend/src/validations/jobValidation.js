@@ -13,13 +13,14 @@ const jobSchema = z
       .min(20, { message: "Description must be at least 20 characters long" })
       .max(500, { message: "Description cannot exceed 500 characters" })
       .trim(),
-      jobType:z.string(),
+    jobType: z.string(),
     company: z
       .string()
       .min(3, { message: "Company name must be at least 3 characters long" })
       .max(50, { message: "Company name cannot exceed 50 characters" })
       .trim(),
-
+    experience: z.enum(["0-1", "1-3", "3-5", "5+"]),
+    salary:z.number().optional(),
     skills: z
       .array(z.string().min(1, { message: "Skill cannot be empty" }))
       .min(1, { message: "At least one skill is required" })
