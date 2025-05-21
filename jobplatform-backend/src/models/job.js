@@ -38,6 +38,6 @@ const jobSchema = new Schema({
     country: String,
     postal_code: String,
   },
-});
+},{timestamps:true});
 
 module.exports = mongoose.model('Job', jobSchema);

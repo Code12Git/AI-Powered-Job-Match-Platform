@@ -4,13 +4,15 @@ import JobModal from '../../ui/modal/JobModal';
 import type { Job } from '../../types';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { fetchJob } from '../../redux/actions/jobAction';
+import { FiBriefcase } from 'react-icons/fi';
+import { formatDistanceToNow } from 'date-fns';
 
 const FetchJobs = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
   const dispatch = useAppDispatch();
-  const { isLoading, jobData } = useAppSelector((state) => state.job);
-
+  const { isLoading, jobData, filteredData } = useAppSelector((state) => state.job);
+  
   useEffect(() => {
     dispatch(fetchJob());
   }, [dispatch]);
@@ -35,12 +37,14 @@ const FetchJobs = () => {
     );
   }
 
+  const newJobData = filteredData ? filteredData : jobData
+  console.log(newJobData)
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold text-gray-800 mb-8">Available Jobs</h1>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {jobData && jobData.map((job: Job, index: number) => (
+        {Array.isArray(newJobData) && newJobData.map((job: Job, index: number) => (
           <motion.div
             key={job._id}
             onClick={() => handleOpenModal(job)}
@@ -76,6 +80,12 @@ const FetchJobs = () => {
                   <span>{job.location.city}, {job.location.state}</span>
                 </div>
               </div>
+              <div className="mb-4">
+                <div className="flex gap-2 items-center text-gray-500 mb-2">
+                  <FiBriefcase />
+                  <span>{job.experience}</span>
+                </div>
+              </div>
 
               <div className="mb-6">
                 <h3 className="text-sm font-semibold text-gray-700 mb-2">Required Skills:</h3>
@@ -95,8 +105,10 @@ const FetchJobs = () => {
                 <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
                   Apply Now
                 </button>
-                <span className="text-xs text-gray-500">Posted 2 days ago</span>
-              </div>
+                <span className="text-xs text-gray-500">   Posted {job.createdAt ? formatDistanceToNow(new Date(job.createdAt), { addSuffix: true }) : '2 days ago'}
+
+                </span>
+                </div>
             </div>
           </motion.div>
         ))}

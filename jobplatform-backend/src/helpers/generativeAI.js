@@ -3,11 +3,9 @@ const { fromEnv } = require('../utils');
 
 exports.generateJobRecommendation = async (userProfile, jobData) => {
     const genAI = new GoogleGenerativeAI(fromEnv('GOOGLE_GEMINI_API_KEY'));
-    
     try {
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-        // Prepare job data context with proper location formatting
         const jobContext = jobData.slice(0, 50).map(job => {
             const location = job.location 
                 ? `${job.location.city}, ${job.location.state}, ${job.location.country || ''}`.trim()
@@ -59,6 +57,7 @@ exports.generateJobRecommendation = async (userProfile, jobData) => {
         
         Important Rules:
         - Never invent jobs not in the provided list
+        - Never include the skills which are present in user profile in missingSkills
         - Location match must consider user preferences
         - Experience fit should compare job requirements vs user's experience
         - Salary should be noted if significantly above/below market
@@ -84,7 +83,6 @@ exports.generateJobRecommendation = async (userProfile, jobData) => {
                 } : rec;
             });
             
-            console.log(recommendations)
             return recommendations;
             
         } catch (e) {
