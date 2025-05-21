@@ -3,7 +3,12 @@ import { Link } from 'react-router-dom'
 import useAuth from '../hooks/useAuth'
 const Navbar = () => {
     const authenticated = useAuth()
-    console.log(authenticated)
+    const logoutHandler = () => {
+      localStorage.removeItem('user');
+      localStorage.removeItem('token');
+      localStorage.removeItem('persist:root');
+    };
+    
   return (
     <motion.nav
       className="bg-white shadow-md sticky top-0 z-50"
@@ -22,7 +27,7 @@ const Navbar = () => {
             <Link to="/jobs" className="text-gray-700 hover:text-blue-600 font-medium transition">Jobs</Link>
             <Link to="/profile" className="text-gray-700 hover:text-blue-600 font-medium transition">Profile</Link>
             <Link to="/recommendations" className="text-gray-700 hover:text-blue-600 font-medium transition">Matches</Link>
-            <Link to="/login" className="text-gray-700 hover:text-blue-600 font-medium transition">{authenticated?"Logout":"Login"}</Link>
+            <Link onClick={logoutHandler} to="/login" className="text-gray-700 hover:text-blue-600 font-medium transition">{authenticated?"Logout":"Login"}</Link>
           </div>
         </div>
       </div>
