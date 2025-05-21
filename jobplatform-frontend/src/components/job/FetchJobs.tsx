@@ -1,44 +1,21 @@
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import { privateRequest } from '../../helpers/axios';
 import JobModal from '../../ui/modal/JobModal';
-
-interface Job {
-  _id: string;
-  company: string;
-  title: string;
-  description: string;
-  jobType: string;
-  location: {
-    city: string;
-    state: string;
-    country: string;
-    postal_code: string;
-  };
-  skills: string[];
-  __v: number;
-}
+import type { Job } from '../../types';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { fetchJob } from '../../redux/actions/jobAction';
 
 const FetchJobs = () => {
-  const [jobs, setJobs] = useState<Job[]>([]);
-  const [loading, setLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
+  const dispatch = useAppDispatch();
+  const { isLoading, jobData } = useAppSelector((state) => state.job);
 
   useEffect(() => {
-    const fetchJobs = async () => {
-      try {
-        const res = await privateRequest.get('/job/alljobs');
-        setJobs(res.data.data);
-      } catch (error) {
-        console.error('Error fetching jobs:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
+    dispatch(fetchJob());
+  }, [dispatch]);
 
-    fetchJobs();
-  }, []);
+  console.log(jobData)
 
   const handleOpenModal = (job: Job) => {
     setSelectedJob(job);
@@ -50,7 +27,7 @@ const FetchJobs = () => {
     setSelectedJob(null);
   };
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="flex justify-center items-center h-64">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
@@ -63,7 +40,7 @@ const FetchJobs = () => {
       <h1 className="text-3xl font-bold text-gray-800 mb-8">Available Jobs</h1>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {jobs.map((job, index) => (
+        {jobData && jobData.map((job: Job, index: number) => (
           <motion.div
             key={job._id}
             onClick={() => handleOpenModal(job)}
@@ -103,7 +80,7 @@ const FetchJobs = () => {
               <div className="mb-6">
                 <h3 className="text-sm font-semibold text-gray-700 mb-2">Required Skills:</h3>
                 <div className="flex flex-wrap gap-2">
-                  {job.skills.map((skill) => (
+                  {job.skills?.map((skill: string) => (
                     <span 
                       key={skill} 
                       className="px-2 py-1 bg-blue-50 text-blue-700 text-xs rounded-full"
@@ -125,7 +102,6 @@ const FetchJobs = () => {
         ))}
       </div>
 
-      {/* Modal with job data and close handler */}
       <JobModal job={selectedJob} isOpen={isOpen} onClose={handleCloseModal} />
     </div>
   );

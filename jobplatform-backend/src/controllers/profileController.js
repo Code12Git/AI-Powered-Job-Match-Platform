@@ -12,7 +12,7 @@ const create = async(request,response) => {
 
 const get = async(request,response) => {
     try{
-        const result = await profileManager.get(request.params)
+        const result = await profileManager.get(request.user)
         return responseManager.sendSuccessResponse(response,result,'Profile fetched Successfully!')
     }catch(err){
         return responseManager.sendErrorResponse(response,err,'Profile cant be  fetched successfully!')

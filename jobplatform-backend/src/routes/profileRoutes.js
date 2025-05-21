@@ -6,7 +6,7 @@ const { verifyToken, verifyTokenAndAdmin } = require('../middleware/verifyToken'
 const router = express.Router();
 
 router.post('/',verifyToken,verifyData(profileSchema),profileController.create)
-router.get('/:id',verifyToken,profileController.get)
+router.get('/',verifyToken,profileController.get)
 router.get('/all',verifyTokenAndAdmin,profileController.getAll)
 
 module.exports = router

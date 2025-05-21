@@ -1,6 +1,9 @@
+const { generateJobRecommendation } = require("../helpers/generativeAi");
 const { jobModel } = require("../models");
+const profile = require("../models/profile");
 const { AppError } = require("../utils");
 const { NOT_FOUND } = require("../utils/errors");
+const _ = require('lodash')
 
 const create = async (body) => {
     const { title, description, company, skills,jobType, location, experience,salary } = body;
@@ -59,4 +62,18 @@ const getAll = async () => {
     }
 };
 
-module.exports = { create, get, getAll, update, deleteOne };
+const getRecommendation = async(body) => {
+    const {profileData,jobData} = body;
+    if(_.isEmpty(profileData.skills) || _.isEmpty(profileData.experience) || _.isEmpty(profileData.jobType))  {
+        throw new AppError({...NOT_FOUND,message:'All fields should be present'})
+    }
+    try{
+        const recommendation=await generateJobRecommendation(profileData,jobData)
+        console.log("Recommendation",recommendation)
+        return recommendation;
+    }catch(err){
+        throw err;
+    }
+}
+
+module.exports = { create, get, getAll, update, deleteOne,getRecommendation };

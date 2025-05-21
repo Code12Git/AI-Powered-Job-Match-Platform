@@ -44,6 +44,27 @@ export interface User {
     loading:boolean;
     error:null
   }
+  export interface  jobState{
+    jobData:Job | [],
+    isLoading:boolean,
+    error:null
+  }
+  export interface Job {
+    _id: string;
+    company: string;
+    title: string;
+    description: string;
+    jobType: string;
+    location: {
+      city: string;
+      state: string;
+      country: string;
+      postal_code: string;
+    };
+    skills: string[];
+    __v: number;
+  }
+  
   export interface modalState{
     modalType:string;
     modalProps:boolean
@@ -73,23 +94,42 @@ export interface User {
     message?: string;
   }
   
+export interface profileState{
+  profileData:UserProfile | null,
+  isLoading:boolean,
+  error:null
+}
+
+export interface UserProfile {
+  _id: string;  
+  user: string; 
+  skills: string[];  
+  jobType: "onsite" | "remote" | "hybrid"; 
+  location: {
+    city?: string;
+    state?: string;
+    country?: string;
+    postalCode?:string
+  };
+  experience: "0-1" | "1-3" | "3-5" | "5+";  
+}
+
+
   export interface userPayload {
     user?: User;
     token?: string;
     error?: string;
     id?: string;
   }
+
+  export interface profilePayload{
+    
+  }
   
   export interface userDataPayload{
     user?:User
   }
-  
-  export interface  searchTerm {
-    searchType:string
-    status: string;
-    priority: string;
-    dueDate: string;
-  }
+
   // Your existing task interfaces
   export interface Task {
     _id?:string
@@ -109,6 +149,24 @@ export interface User {
     isLoading: boolean;
     error: string | null;  // Changed to string for consistency
   }
+
+  export interface JobMatch {
+    company: string;
+    experienceFit: "perfect" | "partial" | "none";  
+    fullDescription: string;
+    jobId: string;  
+    jobTitle: string;
+    location: string;
+    locationMatch: "perfect" | "partial" | "none"; 
+    matchScore: number; 
+    missingSkills: string[];
+    reason: string;
+    salary: string;  
+    skillsMatch: string[];
+  }
+
+  export type JobSuggested = JobMatch[];
+  
   
 
   export type ErrorType = 
