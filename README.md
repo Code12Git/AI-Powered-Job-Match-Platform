@@ -5,9 +5,14 @@
 This is a full-stack application that helps job seekers find relevant job openings using AI-powered recommendations. Users can create profiles, browse job listings, and get personalized job suggestions based on their skills and experience.
 
 <img width="1425" alt="Image" src="https://github.com/user-attachments/assets/cb31f456-0812-4648-a139-0c71467f81a1" />
+
 <img width="1427" alt="Image" src="https://github.com/user-attachments/assets/b160c352-cd63-4fb4-bc5b-0f505141e5d5" />
+
 <img width="1440" alt="Image" src="https://github.com/user-attachments/assets/8114c318-6410-47b6-9a84-cfca6ac8348a" />
+
+
 ## Features
+
 ### Core Features
 
 - User Authentication: Sign up, login, and logout functionality
