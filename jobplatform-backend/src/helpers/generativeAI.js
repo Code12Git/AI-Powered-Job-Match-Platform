@@ -1,7 +1,7 @@
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 const { fromEnv } = require('../utils');
 
-exports.generateJobRecommendation = async (userProfile, jobData) => {
+const generateJobRecommendation = async (userProfile, jobData) => {
 
     const genAI = new GoogleGenerativeAI(fromEnv('GOOGLE_GEMINI_API_KEY'));
     try {
@@ -120,3 +120,5 @@ exports.generateJobRecommendation = async (userProfile, jobData) => {
         throw new Error('Failed to generate recommendations');
     }
 };
+
+module.exports = generateJobRecommendation
