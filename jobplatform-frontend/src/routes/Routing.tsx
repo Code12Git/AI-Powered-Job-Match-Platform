@@ -6,20 +6,23 @@ import Dashboard from "../pages/Dashboard";
 import Jobs from "../pages/Jobs";
 import RequireAuth from "../hooks/RequireAuth";
 import Match from "../pages/Match";
- 
+import PublicRoute from "../hooks/PublicRoute"; 
+
 const Routing = () => {
   return (
     <Routes>
-      {/* Public routes */}
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
+      {/* Public routes - accessible without auth */}
+      <Route element={<PublicRoute />}>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+      </Route>
       
-      {/* Protected routes */}
+      {/* Protected routes - require auth */}
       <Route element={<RequireAuth />}>
-        <Route path='/' element={<Dashboard />} />
+        <Route path="/" element={<Dashboard />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/jobs" element={<Jobs />} />
-        <Route path='/recommendations' element={<Match />} />
+        <Route path="/recommendations" element={<Match />} />
       </Route>
     </Routes>
   );
