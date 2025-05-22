@@ -1,6 +1,5 @@
-const { generateJobRecommendation } = require("../helpers/generativeAi");
+const  generateJobRecommendation  = require("../helpers/generativeAI");
 const { jobModel } = require("../models");
-const profile = require("../models/profile");
 const { AppError } = require("../utils");
 const { NOT_FOUND } = require("../utils/errors");
 const _ = require('lodash')
