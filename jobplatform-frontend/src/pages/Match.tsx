@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
 import { fetchProfile } from "../redux/actions/profileAction";
 import { getSuggestedJobs } from "../redux/actions/jobAction";
+import  toast  from "react-hot-toast";
 import type { JobMatch } from "../types";
 
 const Match = () => {
@@ -14,12 +15,13 @@ const Match = () => {
     useEffect(()=>{
         dispatch(fetchProfile())
     },[dispatch])
-
+    console.log("Profile Data:", profileData);
     const fetchJobRecommendation = async() => {
       if (profileData) {
         dispatch(getSuggestedJobs(profileData, jobData));
       } else {
         console.error("Profile data is null. Cannot fetch job recommendations.");
+        toast.error("Please fill in your profile to get job recommendations.");
       }
     }
    return (
