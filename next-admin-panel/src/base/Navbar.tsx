@@ -1,18 +1,17 @@
 'use client';
-
+import useAuth from '@/helpers/auth';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 export default function Navbar() {
   const router = useRouter();
+  const { isAuthenticated, isLoading } = useAuth();
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    const user = localStorage.getItem('user')
-    if (!token&& !user) {
+    if (!isLoading && !isAuthenticated) {
       router.push('/login');
     }
-  }, [router]);
+  }, [router, isAuthenticated, isLoading]);
 
   const handleLogout = () => {
     localStorage.removeItem('user');

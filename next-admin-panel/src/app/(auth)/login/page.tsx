@@ -6,11 +6,14 @@ import { useForm } from 'react-hook-form';
 import { publicRequest } from '@/helpers/axios';
 import loginSchema  from '@/validations/loginValidation';
 import toast from 'react-hot-toast'
+import useAuth from '@/helpers/auth';
 import type { z } from 'zod';
 import { useRouter } from 'next/navigation';
 type LoginForm = z.infer<typeof loginSchema>;
 
 const AdminLogin = () => {
+    const auth = useAuth();
+    const {isAuthenticated} = auth;
     const [isLoading, setIsLoading] = useState(false);
     const [submitError, setSubmitError] = useState<string | null>(null);
     const router = useRouter()
@@ -29,13 +32,10 @@ const AdminLogin = () => {
     });
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
-        const user = localStorage.getItem('user')
-        if (token && user) {
+        if (isAuthenticated) {
           router.push('/');
         }
-      }, [router]);
-    
+      }, [router,isAuthenticated]);
 
     const onSubmit = async (data: LoginForm) => {
         setIsLoading(true);
@@ -43,7 +43,7 @@ const AdminLogin = () => {
         
         try {
             const res = await publicRequest.post('/auth/admin', data);
-             localStorage.setItem('user',JSON.stringify(res.data.data.admin))
+            localStorage.setItem('user',JSON.stringify(res.data.data.admin))
             localStorage.setItem('token',res.data.data.token)
             toast.success('Admin Login Successfull')
             clearErrors();
