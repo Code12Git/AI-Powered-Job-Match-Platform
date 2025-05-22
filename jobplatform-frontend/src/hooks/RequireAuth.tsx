@@ -1,6 +1,5 @@
-// src/hooks/RequireAuth.tsx
 import React from 'react';
-import { useNavigate, Outlet } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 import Navbar from '../base/Navbar';
 
 interface RequireAuthProps {
@@ -8,29 +7,17 @@ interface RequireAuthProps {
 }
 
 const RequireAuth: React.FC<RequireAuthProps> = ({ children }) => {
-  const navigate = useNavigate();
   const user = localStorage.getItem('user');
   const token = localStorage.getItem('token');
 
-  React.useEffect(() => {
-    if (!user || !token) {
-      navigate('/login', { replace: true });
-    }
-  }, [navigate, user, token]);
-
   if (!user || !token) {
-    return null;
+    return <Navigate to="/login" replace />;
   }
 
-  return children ? (
+  return (
     <>
       <Navbar />
-      {children}
-    </>
-  ) : (
-    <>
-      <Navbar />
-      <Outlet />
+      {children ? children : <Outlet />}
     </>
   );
 };
