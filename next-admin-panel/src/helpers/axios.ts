@@ -1,7 +1,7 @@
 // src/helpers/axios.ts
 import axios from 'axios'
 
-const BASE_URL = 'http://localhost:3001/api/v1'
+const BASE_URL = 'https://ai-powered-job-match-platform-hbhf.onrender.com/api/v1'
 
 let token: string | null = null;
 
