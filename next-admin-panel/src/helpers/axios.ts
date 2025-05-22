@@ -1,4 +1,5 @@
 // src/helpers/axios.ts
+'use client'
 import axios from 'axios'
 
 const BASE_URL = 'https://ai-powered-job-match-platform-hbhf.onrender.com/api/v1'
