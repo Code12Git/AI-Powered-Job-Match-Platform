@@ -31,7 +31,6 @@ const Register = () => {
       });
 
   const submitHandler = async (data:RegisterForm) => {
-    console.log(errors,isSubmitting)
   const res = await        dispatch(registerUser(data))
         clearErrors()
         reset()

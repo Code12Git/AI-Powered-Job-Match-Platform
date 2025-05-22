@@ -25,8 +25,7 @@ const jobReducer = (
   switch (type) {
     // Search Profile
     case SEARCH:
-      console.log(payload);
-      return {
+       return {
         ...state,
         jobData: state.jobData.filter((job) =>
           job.title.toLowerCase().includes(payload.title.toLowerCase())
@@ -42,8 +41,7 @@ const jobReducer = (
           experience === "any" || job.experience === experience;
         return matchesJobType && matchesExperience;
       });
-      console.log(filteredJobs)
-
+ 
       return {
         ...state,
         filteredData: filteredJobs,
@@ -58,8 +56,7 @@ const jobReducer = (
         error: null,
       };
     case FETCH_JOB_SUCCESS:
-      console.log(payload);
-      return {
+       return {
         ...state,
         isLoading: false,
         jobData: payload,
@@ -79,8 +76,7 @@ const jobReducer = (
       }  
 
     case JOB_SUGGESTION_SUCCESS:
-      console.log(payload)
-      return {
+       return {
         ...state,
         suggestedData:payload,
         isLoading: false,

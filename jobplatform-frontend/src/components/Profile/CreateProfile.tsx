@@ -48,9 +48,7 @@ const CreateProfile = () => {
   };
 
   const onSubmit = async(data: ProfileFormData) => {
-    console.log('Form submitted:', data);
-    const res = await privateRequest.post('/profile',data)
-    console.log(res)
+     await privateRequest.post('/profile',data)
   };
 
   return (

@@ -43,8 +43,7 @@ const AdminLogin = () => {
         
         try {
             const res = await publicRequest.post('/auth/admin', data);
-            console.log('Login successful:', res.data);
-            localStorage.setItem('user',JSON.stringify(res.data.data.admin))
+             localStorage.setItem('user',JSON.stringify(res.data.data.admin))
             localStorage.setItem('token',res.data.data.token)
             toast.success('Admin Login Successfull')
             clearErrors();

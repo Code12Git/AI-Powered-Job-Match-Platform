@@ -18,9 +18,9 @@ const create = async (body) => {
 
 const update = async (body,params) => {
     const {id} = params;
-    const { title, description, company, skills,jobType, location } = body;
+    const { title, description, company, skills,jobType, location,experience,salary } = body;
     try{
-        const job = await jobModel.findByIdAndUpdate(id,{title, description, company, skills,jobType, location},{new:true})
+        const job = await jobModel.findByIdAndUpdate(id,{title, description, company, skills,jobType, location,experience,salary},{new:true})
         if(!job) throw new AppError({...NOT_FOUND,message:'Job not found!'})
         return job;    
     }catch(err){
