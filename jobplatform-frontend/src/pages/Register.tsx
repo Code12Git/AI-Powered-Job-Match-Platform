@@ -18,7 +18,7 @@ const Register = () => {
         handleSubmit,
         clearErrors,
         reset,
-        formState: { errors, isSubmitting },
+        formState: { errors },
       } = useForm<RegisterForm>({
         resolver: zodResolver(registerSchema),
         defaultValues: {
