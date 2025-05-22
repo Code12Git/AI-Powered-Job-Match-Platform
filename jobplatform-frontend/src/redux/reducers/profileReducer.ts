@@ -23,8 +23,7 @@ const profileReducer = (state = initialState, { type, payload }: { type: string;
         error: null
       };
     case FETCH_PROFILE_SUCCESS:
-      console.log(payload)
-      return {
+       return {
         ...state,
         isLoading: false,
         profileData: payload,

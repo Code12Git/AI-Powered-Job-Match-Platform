@@ -7,24 +7,32 @@ import { filteredJob, searchJob } from '../../redux/actions/jobAction'
 interface FilterState {
   jobType: string;
   experience: string;
-  // Add more filter fields as needed
-}
+ }
 
 const JobSearch = () => {
   const [title, setTitle] = useState('')
+  const[searchTriggered,setSearchTriggered] = useState(false)
   const [filters, setFilters] = useState<FilterState>({
     jobType: 'any',
     experience: 'any'
   })
   const dispatch = useAppDispatch()
  
-  useEffect(()=>{
-    dispatch(filteredJob(filters))
-  },[filters,dispatch])
+  useEffect(() => {
+    if (searchTriggered) {
+       dispatch(searchJob(title)).then(() => {
+        dispatch(filteredJob(filters))
+      })
+    } else {
+       dispatch(filteredJob(filters))
+    }
+  }, [filters, dispatch, title, searchTriggered])
+
 
   const searchHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     dispatch(searchJob(title))
+    setSearchTriggered(true)
   }
 
   const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -33,6 +41,7 @@ const JobSearch = () => {
       ...prev,
       [name]: value
     }))
+    setSearchTriggered(false)
   }
   
 

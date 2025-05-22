@@ -10,8 +10,7 @@ const Match = () => {
     const dispatch = useAppDispatch()
     const {profileData} = useAppSelector(state=>state.profile)
     const {jobData,isLoading,suggestedData} = useAppSelector(state=>state.job)
-    console.log(profileData)
-    console.log(jobData)
+ 
     useEffect(()=>{
         dispatch(fetchProfile())
     },[dispatch])
@@ -23,8 +22,7 @@ const Match = () => {
         console.error("Profile data is null. Cannot fetch job recommendations.");
       }
     }
-    console.log(suggestedData)
-  return (
+   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
         {/* Header */}

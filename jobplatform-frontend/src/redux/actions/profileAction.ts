@@ -14,8 +14,7 @@ export const fetchProfile = () => async (dispatch: Dispatch) => {
   dispatch({ type: FETCH_PROFILE_REQUEST });
   try {
     const response = await privateRequest.get<AuthResponse>('/profile');
-    console.log(response)
-    dispatch({
+     dispatch({
       type: FETCH_PROFILE_SUCCESS,
       payload: response.data.data
     

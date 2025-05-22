@@ -17,8 +17,7 @@ const FetchJobs = () => {
     dispatch(fetchJob());
   }, [dispatch]);
 
-  console.log(jobData)
-
+ 
   const handleOpenModal = (job: Job) => {
     setSelectedJob(job);
     setIsOpen(true);
@@ -38,8 +37,7 @@ const FetchJobs = () => {
   }
 
   const newJobData = filteredData ? filteredData : jobData
-  console.log(newJobData)
-  return (
+   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold text-gray-800 mb-8">Available Jobs</h1>
       
