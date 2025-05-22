@@ -7,20 +7,12 @@ import { loginUser } from '../redux/actions/authAction';
 import loginValidation from '../validation/loginValidation';
 import z from 'zod'
 import {  useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
 type loginForm = z.infer<typeof loginValidation>;
 
 const Login = () => {
     const { isLoading, error } = useAppSelector((state) => state.auth);
     const dispatch = useAppDispatch();
     const navigate = useNavigate()
-    const user = localStorage.getItem('user');
-    const token = localStorage.getItem('token');
-   useEffect(()=>{
-        if (user && token) {
-            navigate('/')
-        }
-   },[navigate,user,token]) 
     const {
         register,
         handleSubmit,

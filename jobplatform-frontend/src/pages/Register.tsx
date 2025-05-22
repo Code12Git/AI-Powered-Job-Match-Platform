@@ -6,7 +6,6 @@ import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { registerUser } from '../redux/actions/authAction';
 import { useNavigate } from 'react-router-dom';
 import  { registerSchema, type RegisterForm } from '../validation/RegisterValidation';
-import { useEffect } from 'react';
 
 
 
@@ -14,13 +13,8 @@ const Register = () => {
     const {isLoading,error} = useAppSelector(state=>state.auth)
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
-    const user = localStorage.getItem('user');
-    const token = localStorage.getItem('token');
-    useEffect(()=>{
-         if (user && token) {
-             navigate('/')
-         }
-    },[navigate,user,token]) 
+
+
     const {
         register,
         handleSubmit,
